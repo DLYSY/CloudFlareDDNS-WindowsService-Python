@@ -54,7 +54,8 @@ def main():
         logger.error("找不到DNS解析json文件")
         exit()
     except Exception as error_info:
-        logger.error("")
+        logger.error("发生意外错误：%s",error_info)
+        exit()
 
     for i,data in enumerate(dns_info):
         if data['type']=='AAAA':
