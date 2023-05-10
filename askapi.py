@@ -1,10 +1,8 @@
-from urllib3 import PoolManager
+import requests
 from json import dumps
 
 def ask_api(accountInfo, dnsInfo):
-    apiUrl = 'https://api.cloudflare.com/client/v4/zones/%s/dns_records/%s' % (
-        accountInfo['zones'], dnsInfo['dns_records']
-    )
+    apiUrl = 'https://api.cloudflare.com/client/v4/zones/%s/dns_records/%s' % (accountInfo['zones'], dnsInfo['dns_records'])
 
     dnsInfo.pop('dns_records')
     body = dumps(dnsInfo)
@@ -15,6 +13,5 @@ def ask_api(accountInfo, dnsInfo):
         'X-Auth-Key': accountInfo['api'],
         'Content-Type': 'application/json'
     }
-
-    res = PoolManager().request("PUT", apiUrl, body=body, headers=headers)
-    return res.status
+    ask_api_status_code = requests.put(apiUrl,data=body,headers=headers).status_code
+    return ask_api_status_code
