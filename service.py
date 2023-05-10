@@ -45,7 +45,7 @@ class ddns_service(win32serviceutil.ServiceFramework):
         self.logger.info("开始运行")#输出日志   
         while not self.stop.is_set():
             main()
-            self.stop.wait(180)
+            self.stop.wait(90)
         self.logger.info("服务成功停止")
 
     def SvcStop(self):

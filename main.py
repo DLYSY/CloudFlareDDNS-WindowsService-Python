@@ -15,12 +15,17 @@ logger=getLogger('CLoudFlare DDNS Service')
 dns_file=path.join(path.abspath(path.dirname(getfile(currentframe()))),'dns.json')
 account_file=path.join(path.abspath(path.dirname(getfile(currentframe()))),'account.json')
 
-with open(account_file,"r+")as file:
-    account_info=loads(file.read())
+try:
+    with open(account_file,"r+")as file:
+        account_info=loads(file.read())
+except FileNotFoundError:
+    logger.critical("找不到account.json")
+    exit()
+
+
 
 def main():
     global account_info,logger
-
 
     logger.info("开始获取ipv4")
     try:
@@ -69,5 +74,15 @@ def main():
         else:
             logger.error("%s号DNS解析失败，服务器返回：%s",i,res)
 
+
+
 if __name__=="__main__":
+    import logging
+    handler = logging.StreamHandler()
+
+    formatter = logging.Formatter('【%(levelname)s】%(asctime)s《%(module)s：第%(lineno)d行》 · %(message)s',"%y/%m/%d-%H:%M:%S")
+    handler.setFormatter(formatter)
+
+    logger.addHandler(handler)
+    logger.setLevel(logging.DEBUG)
     main()
