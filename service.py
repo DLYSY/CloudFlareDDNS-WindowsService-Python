@@ -28,7 +28,7 @@ class ddns_service(win32serviceutil.ServiceFramework):
 
         this_file = getfile(currentframe())
         dirpath = path.abspath(path.dirname(this_file))
-        handler = handlers.TimedRotatingFileHandler(path.join(dirpath, "log/DDNS_Service.log"),when="D",backupCount=7)
+        handler = handlers.TimedRotatingFileHandler(path.join(dirpath, "log/DDNS_Service.log"),when="midnight",backupCount=7)
 
         formatter = logging.Formatter('【%(levelname)s】%(asctime)s《%(module)s：第%(lineno)d行》 · %(message)s',"%H:%M:%S")
         handler.setFormatter(formatter)
