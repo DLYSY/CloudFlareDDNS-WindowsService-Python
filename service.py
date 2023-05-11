@@ -3,6 +3,7 @@ import win32service
 import win32event
 from os import path
 import logging
+from logging import handlers
 from inspect import getfile,currentframe
 from main import main
 from threading import Event
@@ -27,13 +28,13 @@ class ddns_service(win32serviceutil.ServiceFramework):
 
         this_file = getfile(currentframe())
         dirpath = path.abspath(path.dirname(this_file))
-        handler = logging.FileHandler(path.join(dirpath, "DDNS_Service.log"))
+        handler = handlers.TimeRotatingFileHandler(path.join(dirpath, "log/DDNS_Service.log"),when="D",backupCount=7)
 
-        formatter = logging.Formatter('【%(levelname)s】%(asctime)s《%(module)s：第%(lineno)d行》 · %(message)s',"%y/%m/%d-%H:%M:%S")
+        formatter = logging.Formatter('【%(levelname)s】%(asctime)s《%(module)s：第%(lineno)d行》 · %(message)s',"%H:%M:%S")
         handler.setFormatter(formatter)
 
         logger.addHandler(handler)
-        logger.setLevel(logging.WARN)
+        logger.setLevel(logging.INFO)
 
         return logger
 
@@ -42,7 +43,7 @@ class ddns_service(win32serviceutil.ServiceFramework):
         '''
         服务逻辑
         '''
-        self.logger.info("开始运行")#输出日志   
+        self.logger.info("服务开始运行")#输出日志   
         while not self.stop.is_set():
             main()
             self.stop.wait(90)
