@@ -12,12 +12,12 @@ from sys import exit
 logger=getLogger('CLoudFlare DDNS Service')
     
 dns_file=path.join(path.abspath(path.dirname(getfile(currentframe()))),'dns.json')
-account_file=path.join(path.abspath(path.dirname(getfile(currentframe()))),'account.json')
+account_file=path.join(path.abspath(path.dirname(getfile(currentframe()))),'api_token.json')
 
 logger.debug("读取账户信息")
 try:
     with open(account_file,"r+")as file:
-        account_info=loads(file.read())
+        api_token=loads(file.read())["api_token"]
     logger.debug("读取成功")
 except FileNotFoundError:
     logger.critical("找不到account.json")
@@ -83,7 +83,7 @@ def main():
         elif data['type']=='A' and get_ipv4_error:
             continue
 
-        ask_api_status_code=ask_api(accountInfo=account_info,dnsInfo=data)
+        ask_api_status_code=ask_api(api_token=api_token,dns_info=data)
         match ask_api_status_code:
             case 200:
                 logger.info("%s号DNS成功解析",i)

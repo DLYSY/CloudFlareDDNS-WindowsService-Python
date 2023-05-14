@@ -8,19 +8,18 @@ logger=getLogger("CLoudFlare DDNS Service")
 
 
 
-def ask_api(accountInfo, dnsInfo):
+def ask_api(api_token:str,dns_info:dict):
     global logger
 
     logger.debug("创建请求标头、内容等")
-    apiUrl = 'https://api.cloudflare.com/client/v4/zones/%s/dns_records/%s' % (accountInfo['zones'], dnsInfo['dns_records'])
+    apiUrl = "https://api.cloudflare.com/client/v4/zones/"+dns_info["zone_id"]+"/dns_records/"+dns_info["dns_id"]
 
-    dnsInfo.pop('dns_records')
-    body = dumps(dnsInfo)
+    dns_info.pop("dns_id")
+    dns_info.pop("zone_id")
+
+    body = dumps(dns_info)
     headers = {
-        'user-agent': 'Mozilla/5.0',
-        'X-Auth-Email': accountInfo['email'],
-        'X-Auth-Key': accountInfo['api'],
-        'Content-Type': 'application/json'
+        'Authorization':'Bearer '+api_token
     }
 
     logger.debug("请求api")
