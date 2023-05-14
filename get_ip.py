@@ -29,9 +29,9 @@ def get_ip(ip_type:int):
                 return None
         case _:
             raise ValueError("必须指定6以使用ipv6或4以使用ipv4")
-
-    ip=reg[ip_type].search(request_text).group()
-    if ip:
+    ip_search=reg[ip_type].search(request_text)
+    if ip_search!=None:
+        ip=ip_search.group()
         logger.info("获取到的ipv%s地址为%s",ip_type,ip)
         return ip
     else:
