@@ -73,9 +73,9 @@ if __name__=='__main__':
     elif len(argv) == 2 and argv[1] == 'help':
         #help 命令支持
         print('''
-        选项：
-        help：显示本帮助
-        install：安装为系统服务（需要管理员权限）
+            选项：
+            help：显示本帮助
+            install：安装为系统服务（需要管理员权限）
         ''')
         exit()
     else:
