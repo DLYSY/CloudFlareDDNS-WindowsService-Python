@@ -1,16 +1,20 @@
-# CloudFlareDDNS（Windows 服务）
+# 简介（施工中）
 
 CloudFlare动态域名解析，Windows 服务版本
 
-## 简介（施工中）
+Windows 服务部分源码由：
+
+https://github.com/HaroldMills/Python-Windows-Service-Example
+
+提供
 
 由于我只是学生，既没有技术也没有时间，因此环境不同造成的兼容性问题我一律不会修复。
 
-## 使用方法（施工中）
+# 使用方法（施工中）
 
-### 必要条件
+## 必要条件
 
-#### *Python3.10+*
+### *Python3.10+*
 
 Python： https://www.python.org/
 
@@ -24,7 +28,7 @@ Miniconda：https://docs.conda.io/en/latest/miniconda.html
 
 我开发会保持使用最新 Python 大版本（当前3.11），如果你不熟悉 Python，为了防止出现兼容性问题，最好与我使用相同版本。
 
-#### *urllib3*
+### *urllib3*
 
 通过：
 
@@ -32,7 +36,7 @@ Miniconda：https://docs.conda.io/en/latest/miniconda.html
 
 安装。
 
-#### *pywin32*
+### *pywin32*
 
 通过：
 

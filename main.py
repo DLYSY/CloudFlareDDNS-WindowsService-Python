@@ -2,15 +2,15 @@ from logging import getLogger
 from ask_api import ask_api
 from json import load
 from os import path
-from inspect import getfile,currentframe
 from sys import exit
 from get_ip import get_ip
+from sys import argv
 
 
 
 logger=getLogger('CLoudFlare DDNS Service')
     
-config_file=path.join(path.abspath(path.dirname(getfile(currentframe()))),'config.json')
+config_file=path.join(path.dirname(path.realpath(argv[0])),'config.json')
 
 
 
