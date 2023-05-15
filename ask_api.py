@@ -23,7 +23,6 @@ def ask_api(api_token:str,dns_info:dict):
     try:
         ask_api_request = requests.put(apiUrl,data=body,headers={'Authorization':'Bearer '+api_token})
         logger.debug("api请求成功")
-        logger.debug(ask_api_request.text)
         return ask_api_request.status_code
     except requests.Timeout:
         logger.error("请求api时超时")
