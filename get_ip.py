@@ -35,5 +35,5 @@ def get_ip(ip_type:int):
         logger.info("获取到的ipv%s地址为%s",ip_type,ip)
         return ip
     else:
-        logger.warning("获取到不正确的ipv%s",ip_type)
+        logger.error("获取到不正确的ipv%s",ip_type)
         return None

@@ -38,15 +38,18 @@ def main():
                 data["content"]=get_ip(4)
             case _:
                 pass
-
-        ask_api_status_code=ask_api(api_token=config_info["api_token"],dns_info=data)
-        match ask_api_status_code:
-            case 200:
-                logger.info("%s号DNS成功解析",i)
-            case None:
-                logger.error("%s号ask api发生错误，跳过",i)
-            case _:
-                logger.error("%s号DNS解析失败，服务器返回：%s",i,ask_api_status_code)
+        
+        if data["content"]!=None:
+            ask_api_status_code=ask_api(api_token=config_info["api_token"],dns_info=data)
+            match ask_api_status_code:
+                case 200:
+                    logger.info("%s号DNS成功解析",i)
+                case None:
+                    logger.error("%s号ask api发生错误，跳过",i)
+                case _:
+                    logger.error("%s号DNS解析失败，服务器返回：%s",i,ask_api_status_code)
+        else:
+            logger.error("%s号获取到的ip不正确，跳过",i)
 
     
 
