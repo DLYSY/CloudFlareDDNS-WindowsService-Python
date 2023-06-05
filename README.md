@@ -1,79 +1,46 @@
-# 简介（施工中）
+# 简介
 
-CloudFlare动态域名解析，Windows 服务版本
+Cloudflare动态域名解析，包装为 Windows 服务
 
-Windows 服务部分源码由：
+# 使用方法
 
-https://github.com/HaroldMills/Python-Windows-Service-Example
+参见
+[wiki](https://github.com/DLYSY/CloudFlareDDNS-WindowsService-Python/wiki)
 
-提供
+# 兼容性
 
-由于我只是学生，既没有技术也没有时间，因此环境不同造成的兼容性问题我一律不会修复。
+目前只兼容 Windows（废话）。
+
+不过如果你想用类 Unix 系统，也可以克隆/下载后运行`python3 main.py`，需要的包请参考 Windows 的使用方法。
+
+由于我只是学生，既没有技术也没有时间，因此环境不同造成的兼容性问题的 issue 我一律不予修复。（这么简单的程序一般来说也不会有环境兼容性问题）
 
 我开发会保持使用最新 Python 大版本（当前3.11），如果你不熟悉 Python，为了防止出现兼容性问题，建议使用二进制安装，或者与我使用相同Python版本。
 
-# 部署（施工中）
+# 未来计划
 
-## 使用二进制文件（推荐）
+1. 支持类 Unix 系统
 
-1. 从“版本发布”下载`service.exe`然后运行`.\service.exe --startup=delayed install`。
+# 鸣谢
 
-2. 重启计算机或者执行`sc start "Cloudfalre DDNS"`或者在服务管理器中启动服务"CloudFlare DDNS"。
+Windows 服务部分源码参考：
 
-## 自行编译
+https://github.com/HaroldMills/Python-Windows-Service-Example
 
-### 必要条件
+# Q&A
 
-#### 1. Python3.10+
+**Q：会不会支持其他 DNS 解析，比如阿里云？**
 
-获取Python： https://www.python.org/
+A：目前不会，这主要供我个人使用，因为个人目前使用 Cloudflare 所以暂时没有支持其他 DNS 的计划。
 
-或者你也可以使用Conda：
+---
 
-Anaconda：https://www.anaconda.com/
+**Q：会不会支持 Linux systemd 服务？**
 
-Miniconda：https://docs.conda.io/en/latest/miniconda.html
+A：在做，什么时候做好不知道。（新建文件夹 XD）
 
-请务必使用 Python 3.10+，源码使用了`match-case`语句，该语句在 Python 3.10 被加入。虽然我不推荐，但理论上你可以自行修改源码为`if-elif`语句从而使用更低版本的 Python 。
+---
 
-#### 2. Requests
+**Q：那其他 Linux init 系统，比如 OpenRC 呢？**
 
-安装：
-
-`pip install requsets`
-
-#### 3. PyWin32
-
-安装：
-
-`pip install pywin32`
-
-#### 4. PyInstaller
-
-安装：
-
-`pip install pyinstaller[encryption]`
-
-***！！！PS： 请不要使用`conda install`安装相关包，否则将存在兼容性问题导致 Windows 服务无法正常启动！！！***
-
-### 编译
-
-1. 下载/克隆源码；
-
-2. 运行`pyinstaller --hidden-import=win32timezone ./service.py -F`；
-
-然后你就可以在`dist`目录下找到`service.exe`。
-
-***！！！PS： 请务必添加`-F`选项，否则将导致 Windows 服务无法正常启动！！！***
-
-### 安装为 Windows 服务
-
-参考 *“使用二进制文件”*。
-
-## 直接使用PythonService
-
-### 必要条件
-
-参考 *“自行编译”*，除 PyInstaller 外都需要安装。
-
-###
+A：你都玩 Gentoo 了，应该学会自己写脚本了。
