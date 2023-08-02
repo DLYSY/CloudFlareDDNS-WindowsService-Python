@@ -2,12 +2,12 @@ import win32serviceutil
 import win32service
 import win32event
 import servicemanager
-from os import path,mkdir
+from os import path, mkdir
 import logging
 from logging import handlers
 from main import main
 from threading import Event
-from sys import argv,exit
+from sys import argv, exit
 from get_path import get_path
 
 

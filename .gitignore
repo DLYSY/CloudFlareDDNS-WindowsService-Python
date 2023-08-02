@@ -2,7 +2,7 @@
 version.txt
 
 #测试文件
-test/
+test.py
 
 #日志
 log/
